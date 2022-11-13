@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { CATEGORIES } from "../data";
 
-function CategoryFilter() {
+function CategoryFilter( { category, setCategory } ) {
+
+  const [selected, setSelected] = useState('')
+
+  const filterCat = CATEGORIES.map((cat, index) => {
+    return <button className={selected === index ? "selected" : "" } onClick={(e) => {setSelected(index); setCategory(e.target.value)}} value={cat} key={index} id={index}>{cat}</button>
+  })
+
   return (
-    <div className="categories">
-      <h5>Category filters</h5>
-      {/* render <button> elements for each category here */}
-    </div>
+    <span className="categories">
+      <h5 key="category-filter">Category filters</h5> 
+          {filterCat}
+    </span>
   );
 }
 
